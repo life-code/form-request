@@ -1,0 +1,17 @@
+{
+    "name": "form-request",
+    "version": "0.1",
+    "description": "The FormRequest library js for form validation..",
+    "main": "form-request.min.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/life-code/form-request"
+    },
+    "keywords": ["form", "request", "validation", "validator", "form-request"],
+    "author": "Vinicius Pugliesi",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/life-code/form-request/issues"
+    },
+    "homepage": "https://github.com/life-code/form-request#readme"
+}
