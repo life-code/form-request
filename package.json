@@ -1,28 +1,31 @@
 {
-    "name": "form-request",
-    "version": "0.1",
-    "description": "The FormRequest library js for form validation..",
-    "author": "Vinicius Pugliesi <vinicius_pugliesi@outlook.com>",
-    "contributors": [{
-        "name": "Vinicius Pugliesi",
-        "email": "vinicius_pugliesi@outlook.com"
-    }],
-    "bin": {
-        "module-name": "./bin/form-request"
-    },
-    "main": "form-request.min.js",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/life-code/form-request"
-    },
-    "scripts": {},
-    "dependencies": {},
-    "devDependencies": {},
-    "bugs": {
-        "url": "https://github.com/life-code/form-request/issues"
-    },
-    "keywords": ["form", "request", "validation", "validator", "form-request"],
-    "homepage": "https://github.com/life-code/form-request#readme",
-    "preferGlobal": true,
-    "license": "MIT"
+  "name": "form-request",
+  "version": "1.0.0",
+  "description": "The Validation Form Request",
+  "main": "dist/form-request.min.js",
+  "scripts": {
+    "test": "tests/form-request.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/life-code/form-request.git"
+  },
+  "keywords": [
+    "Form",
+    "Request",
+    "Validator",
+    "Validation",
+    "Valid"
+  ],
+  "author": "Vinicius Pugliesi <vinicius_pugliesi@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/life-code/form-request/issues"
+  },
+  "homepage": "https://github.com/life-code/form-request#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0"
+  }
 }
