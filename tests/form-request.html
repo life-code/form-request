@@ -19,20 +19,20 @@
         <form method="post">
             <div class="form-group">
                 <label>Email address</label>
-                <span class="col-sm-12 alert alert-warning" style="display:none" request-error="email"></span>
-                <input type="email" request-name="email" request-rules="required|email" name="email" class="form-control" placeholder="Email">
+                <span class="col-sm-12 alert alert-warning" style="display:none" error="email"></span>
+                <input type="text" request="email" rules="required|email" name="email" class="form-control" placeholder="Email">
             </div>
             
             <div class="form-group">
                 <label>Password</label>
-                <span class="col-sm-12 alert alert-warning" style="display:none" request-error="senha"></span>
-                <input type="password" request-name="senha" request-rules="required" name="password" class="form-control" placeholder="Password">
+                <span class="col-sm-12 alert alert-warning" style="display:none" error="senha"></span>
+                <input type="password" request="senha" rules="required|min:6|max:20" name="password" class="form-control" placeholder="Password">
             </div>
             
             <div class="form-group">
-                <span class="col-sm-12 alert alert-warning" style="display:none" request-error="termos de uso"></span>
+                <span class="col-sm-12 alert alert-warning" style="display:none" error="termos de uso"></span>
                 <div class="checkbox col-sm-12">
-                    <input type="checkbox" request-name="termos de uso" request-rules="required" name="checkbox">
+                    <input type="checkbox" request="termos de uso" rules="required" name="checkbox">
                     <label>Termos de uso</label>
                 </div>
             </div>
@@ -53,10 +53,8 @@
     
     <script>
         $(document).on('submit', 'form', function(){
-            var request = new FormRequest($(this));
-            return request.run();
+            return new FormRequest($(this)).run();
         });
-        
     </script>
 </body>
 </html>

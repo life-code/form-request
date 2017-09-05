@@ -84,7 +84,12 @@ var Validator = (function() {
     Validator.prototype.accepted = function(data) {
         var accepted = [ 'yes', 'on', 1, '1', true, 'true' ];
         
-        return (accepted.indexOf(data) > 0) ? true : false;
+        if (accepted.indexOf(data) <= 0) {
+            errors = 'O campo {name} é inválido.';
+            return false;
+        }
+        
+        return true;
     };
     
     Validator.prototype.after = function(date) {
@@ -131,19 +136,49 @@ var Validator = (function() {
         email = String(email);
         
         if (!email.match(/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.) {3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/)) {
-            errors = 'O email é inválido.';
+            errors = 'O campo {name} deve conter um email válido.';
             return false;
         }
         
         return true;
     };
     
-    Validator.prototype.empty = function(data, length) {
-        return (data === '' || data.length < length);
+    Validator.prototype.in_array = function(key, array) {
+        for (var i = 0; i < array.length; i++) {
+            if (array[i] == key) {
+                return true;
+            }
+        }
+        
+        errors = 'O campo {name} deve conter um destes valores: '+array;
+        return false;
     };
     
     Validator.prototype.integer = function(data) {
-        return (data % 1 === 0 && !isNaN(data % 1)) ? true : false;
+        if (data % 1 !== 0 || isNaN(data % 1)) {
+            errors = 'O campo {name} deve ser inteiro.';
+            return false;
+        }
+        
+        return true;
+    };
+    
+    Validator.prototype.max = function(data, length) {
+        if (data.length > length) {
+            errors = 'O campo {name} deve ter no máximo '+length+' caracteres.';
+            return false;
+        }
+        
+        return true;
+    };
+    
+    Validator.prototype.min = function(data, length) {
+        if (data.length < length) {
+            errors = 'O campo {name} deve ter no mínimo '+length+' caracteres.';
+            return false;
+        }
+        
+        return true;
     };
     
     Validator.prototype.numeric = function(data) {

@@ -18,13 +18,13 @@ var FormRequest = function() {
         $('[error-message]').hide();
         
         var input_val = {
-            date: 'val()',
-            email: 'val()',
-            file: 'val()',
-            hidden: 'val()',
-            number: 'val()',
-            password: 'val()',
-            text: 'val()'
+            date: '',
+            email: '',
+            file: '',
+            hidden: '',
+            number: '',
+            password: '',
+            text: ''
         };
         
         var input_prop = {
@@ -35,12 +35,14 @@ var FormRequest = function() {
         this.form       = form;
         this.input_val  = input_val;
         this.input_prop = input_prop;
+        
+        this.hideError();
     }
     
     FormRequest.prototype = Object.create(Validator.prototype);
     
     FormRequest.prototype.run = function() {
-        var inputs = this.form.find('[request-rules]');
+        var inputs = this.form.find('[rules]');
         
         for (var i = 0; i < inputs.length; i++) {
             var response = this.rules(inputs[i], this.getRules(inputs[i]));
@@ -67,39 +69,47 @@ var FormRequest = function() {
     };
     
     FormRequest.prototype.getName = function(input) {
-        return $(input).attr('request-name');
+        return $(input).attr('request');
     };
     
     FormRequest.prototype.getRules = function(input) {
-        return $(input).attr('request-rules');
+        return $(input).attr('rules');
     };
     
     FormRequest.prototype.displayError = function(input, message) {
-        return $('[request-error="'+this.getName(input)+'"]').html(message).slideDown();
+        return $('[error="'+this.getName(input)+'"]').html(message).slideDown();
     };
     
-    FormRequest.prototype.hideError = function(input, message) {
-        return $('[request-error="'+this.getName(input)+'"]').hide().html();
+    FormRequest.prototype.hideError = function(input) {
+        return (!input) 
+                ? $('[error]').hide().html('')
+                : $('[error="'+this.getName(input)+'"]').hide().html('');
+    };
+    
+    FormRequest.prototype.generateCall = function(input_value, callback) {
+        var params = callback.split(':')[1];
+        
+        var call = 'this.'+callback.split(':')[0]+'(';
+        
+        if (typeof input_value == 'string' && input_value !== '') {
+            call += '"'+input_value+'"';
+        } else {
+            call += input_value;
+        }
+        
+        if (typeof params !== 'undefined') {
+            call += ', '+params;
+        }
+        
+        return eval(call+')');
     };
     
     FormRequest.prototype.rules = function(input, rules) {
         var callback = rules.split('|');
         
         for (var i in callback) {
-            var input_value = this.getValue(input),
-                input_name  = this.getName(input),
-                call        = 'this.' + callback[i] + '()';
-            
-            if (typeof input_value == 'string') {
-                if (input_value !== '') {
-                    call = 'this.' + callback[i] + '("'+input_value+'")';
-                }
-            } else {
-                call = 'this.' + callback[i] + '('+input_value+')';
-            }
-            
-            if (!eval(call)) {
-                return {fails: true, message: this.getErrors(input_name)};
+            if (!this.generateCall(this.getValue(input), callback[i])) {
+                return {fails: true, message: this.getErrors(this.getName(input))};
             }
         }
         
