@@ -15,18 +15,128 @@
 <body>
     <nav class="navbar navbar-default">
         <div class="container">
-            <h1>Validator</h1>
+            <h1>Validator Test</h1>
         </div>
     </nav>
     
     <div class="container">
-        <form method="post" action="/">
-            <div class="form-group">
-                <label>Email address</label>
-                <input type="email" id="email" class="form-control" placeholder="Email">
+        <form method="post">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Valid accepted</label>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> The value isn't accepted.
+                    </div>
+                    <input type="checkbox" checked id="accepted" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label>Valid email</label>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> The email value is invalid.
+                    </div>
+                    <input type="email" id="email" class="form-control" placeholder="Valid email">
+                </div>
+                
+                <div class="form-group">
+                    <label>Alpha value</label>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> The valeu is not alfa.
+                    </div>
+                    <input type="text" id="alpha" class="form-control" placeholder="Alpha value">
+                </div>
+                
+                <div class="form-group">
+                    <label>CNPJ length</label>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> The CNPJ lenght is invalid.
+                    </div>
+                    <input type="text" id="cnpj" class="form-control" placeholder="CNPJ length">
+                </div>
+                
+                <div class="form-group">
+                    <label>Valid CNPJ</label>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> The CNPJ is invalid.
+                    </div>
+                    <input type="text" id="validCnpj" class="form-control" placeholder="Valid CNPJ">
+                </div>
+                
+                <div class="form-group">
+                    <label>CPF length</label>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> The cpf lenght is invalid.
+                    </div>
+                    <input type="text" id="cpf" class="form-control" placeholder="CPF length">
+                </div>
+                
+                <div class="form-group">
+                    <label>Valid CPF</label>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> The CPF is invalid.
+                    </div>
+                    <input type="text" id="validCpf" class="form-control" placeholder="Valid CPF">
+                </div>
             </div>
             
-            <button type="submit" class="btn btn-default">Submit</button>
+            <div class="col-md-6">  
+                <div class="form-group">
+                    <label>Min length 5</label>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> The min length is 5.
+                    </div>
+                    <input type="text" id="empty" class="form-control" placeholder="Min length 5">
+                </div>
+                
+                <div class="form-group">
+                    <label>Integer value</label>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> The value isn't integer
+                    </div>
+                    <input type="text" id="integer" class="form-control" placeholder="Integer value">
+                </div>
+                
+                <div class="form-group">
+                    <label>Numeric value</label>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> The value isn't numeric
+                    </div>
+                    <input type="text" id="numeric" class="form-control" placeholder="Numeric value">
+                </div>
+                
+                <div class="form-group">
+                    <label>Phone value</label>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> The phone value is invalid.
+                    </div>
+                    <input type="text" id="phone" class="form-control" placeholder="Phone value">
+                </div>
+                
+                <div class="form-group">
+                    <label>Required value</label>
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> The field is required.
+                    </div>
+                    <input type="text" id="required" class="form-control" placeholder="Required value">
+                </div>
+                
+                <div class="form-group">
+                    <label class="col-xs-12"> &nbsp; </label>
+                    <input type="submit" value="Submit" class="btn btn-success col-xs-12">
+                </div>
+            </div>
         </form>
     </div>
     
@@ -42,9 +152,122 @@
     <script>
         var validator = new Validator();
         
+        $('.alert').hide();
+        
+        // Validate accepted
+        $(document).on('click', '#accepted', function(){
+            if (!validator.accepted($(this).prop('checked'))) {
+                $(this).parent().find('.alert').slideDown();
+            } else {
+                $(this).parent().find('.alert').slideUp();
+            }
+        });
+        
+        // Validate email
         $(document).on('change', '#email', function(){
             if (!validator.email($(this).val())) {
-                alert('Invalid email');
+                $(this).parent().find('.alert').slideDown();
+            } else {
+                $(this).parent().find('.alert').slideUp();
+            }
+        });
+        
+        // Validate alpha value
+        $(document).on('change', '#alpha', function(){
+            if (!validator.alpha($(this).val())) {
+                $(this).parent().find('.alert').slideDown();
+            } else {
+                $(this).parent().find('.alert').slideUp();
+            }
+        });
+        
+        // Validate cnpj length
+        $(document).on('change', '#cnpj', function(){
+            if (!validator.cnpj($(this).val())) {
+                $(this).parent().find('.alert').slideDown();
+            } else {
+                $(this).parent().find('.alert').slideUp();
+            }
+        });
+        
+        // Validate cpf length
+        $(document).on('change', '#cpf', function(){
+            if (!validator.cpf($(this).val())) {
+                $(this).parent().find('.alert').slideDown();
+            } else {
+                $(this).parent().find('.alert').slideUp();
+            }
+        });
+        
+        // Validate empty value
+        $(document).on('change', '#empty', function(){
+            if (validator.empty($(this).val(), 5)) {
+                $(this).parent().find('.alert').slideDown();
+            } else {
+                $(this).parent().find('.alert').slideUp();
+            }
+        });
+        
+        // Validate integer value
+        $(document).on('change', '#integer', function(){
+            if (!validator.integer($(this).val())) {
+                $(this).parent().find('.alert').slideDown();
+            } else {
+                $(this).parent().find('.alert').slideUp();
+            }
+        });
+        
+        // Validate numeric value
+        $(document).on('change', '#numeric', function(){
+            if (!validator.numeric($(this).val())) {
+                $(this).parent().find('.alert').slideDown();
+            } else {
+                $(this).parent().find('.alert').slideUp();
+            }
+        });
+        
+        // Validate phone value
+        $(document).on('change', '#phone', function(){
+            if (!validator.phone($(this).val())) {
+                $(this).parent().find('.alert').slideDown();
+            } else {
+                $(this).parent().find('.alert').slideUp();
+            }
+        });
+        
+        // Validate required value
+        $(document).on('focusout', '#required', function(){
+            if (!validator.required($(this).val())) {
+                $(this).parent().find('.alert').slideDown();
+            } else {
+                $(this).parent().find('.alert').slideUp();
+            }
+        });
+        
+        // Validate required value
+        $(document).on('change', '#required', function(){
+            if (!validator.required($(this).val())) {
+                $(this).parent().find('.alert').slideDown();
+            } else {
+                $(this).parent().find('.alert').slideUp();
+            }
+        });
+        
+        // Validate valid CPF
+        $(document).on('change', '#validCpf', function(){
+            if (!validator.validCpf($(this).val())) {
+                $(this).parent().find('.alert').slideDown();
+            } else {
+                $(this).parent().find('.alert').slideUp();
+            }
+        });
+        
+        // Validate valid Cnpj
+        $(document).on('change', '#validCnpj', function(){
+            if (!validator.validCnpj($(this).val())) {
+                $(this).parent().find('.alert').slideDown();
+            } else {
+                $(this).parent().find('.alert').slideUp();
             }
         });
     </script>
