@@ -97,7 +97,12 @@ var Validator = (function() {
     };
     
     Validator.prototype.alpha = function(data) {
-        return (data.match(/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/)) ? true : false;
+        if (data.match(/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/)) {
+            return true;
+        }
+        
+        errors = 'O campo {name} deve ser alpha.';
+        return false;
     };
     
     Validator.prototype.array = function(data) {
@@ -135,63 +140,72 @@ var Validator = (function() {
     Validator.prototype.email = function(email) {
         email = String(email);
         
-        if (!email.match(/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.) {3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/)) {
-            errors = 'O campo {name} deve conter um email válido.';
-            return false;
+        if (email.match(/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.) {3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/)) {
+            return true;
         }
         
-        return true;
+        errors = 'O campo {name} deve conter um email válido.';
+        return false;
     };
     
     Validator.prototype.in_array = function(key, array) {
+        array = array.split(',');
+        
         for (var i = 0; i < array.length; i++) {
             if (array[i] == key) {
                 return true;
             }
         }
         
-        errors = 'O campo {name} deve conter um destes valores: '+array;
+        errors = 'O campo {name} deve estar presente na lista: '+array;
         return false;
     };
     
     Validator.prototype.integer = function(data) {
-        if (data % 1 !== 0 || isNaN(data % 1)) {
-            errors = 'O campo {name} deve ser inteiro.';
-            return false;
-        }
-        
-        return true;
-    };
-    
-    Validator.prototype.max = function(data, length) {
-        if (data.length > length) {
-            errors = 'O campo {name} deve ter no máximo '+length+' caracteres.';
-            return false;
-        }
-        
-        return true;
-    };
-    
-    Validator.prototype.min = function(data, length) {
-        if (data.length < length) {
-            errors = 'O campo {name} deve ter no mínimo '+length+' caracteres.';
-            return false;
-        }
-        
-        return true;
-    };
-    
-    Validator.prototype.numeric = function(data) {
-        if (typeof data === 'number') {
+        if (data % 1 === 0 && !isNaN(data % 1)) {
             return true;
         }
         
-        return (data.match(/^\d+(\.\d{1,2})?$/)) ? true : false;
+        errors = 'O campo {name} deve ser inteiro.';
+        return false;
+    };
+    
+    Validator.prototype.max = function(data, length) {
+        if (data.length <= length) {
+            return true;
+        }
+        
+        errors = 'O campo {name} deve ter no máximo '+length+' caracteres.';
+        return false;
+    };
+    
+    Validator.prototype.min = function(data, length) {
+        if (data.length >= length) {
+            return true;
+        }
+        
+        errors = 'O campo {name} deve ter no mínimo '+length+' caracteres.';
+        return false;
+    };
+    
+    Validator.prototype.numeric = function(data) {
+        if (typeof data === 'number' || !data.match(/^\d+(\.\d{1,2})?$/)) {
+            return true;
+        }
+        
+        errors = 'O campo {name} deve ser do tipo numérico.';
+        return false;
     };
     
     Validator.prototype.phone = function(phone) {
         phone = String(phone);
-        return (phone.match(/^\(?\d{2}\)?[\s-]?[\s9]?\d{4}-?\d{4}$/)) ? true : false;
+        
+        if (!phone.match(/^\(?\d{2}\)?[\s-]?[\s9]?\d{4}-?\d{4}$/)) {
+            return true;
+        }
+        
+        errors = 'O campo {name} é inválido.';
+        return false;
     };
     
     Validator.prototype.required = function(data) {
@@ -212,6 +226,7 @@ var Validator = (function() {
     
     Validator.prototype.validCpf = function (cpf) {
         if (!this.cpf(cpf)) {
+            errors = 'O campo {name} é inválido.';
             return false;
         }
         
@@ -224,6 +239,7 @@ var Validator = (function() {
         ];
     
         if (invalid_cpf.indexOf(cpf) > 0 || cpf === '00000000000') {
+            errors = 'O campo {name} é inválido.';
             return false;
         }
         
@@ -240,6 +256,7 @@ var Validator = (function() {
         }
         
         if (rest !== parseInt(cpf.substring(9, 10))) {
+            errors = 'O campo {name} é inválido.';
             return false;
         }
         
@@ -255,17 +272,24 @@ var Validator = (function() {
             rest = 0;
         }
         
-        return (rest === parseInt(cpf.substring(10, 11))) ? true : false;
+        if (rest !== parseInt(cpf.substring(10, 11))) {
+            errors = 'O campo {name} é inválido.';
+            return false;
+        }
+        
+        return true;
     };
     
     Validator.prototype.validCnpj = function(cnpj) {
         if (!this.cnpj(cnpj)) {
+            errors = 'O campo {name} é inválido.';
             return false;
         }
         
         cnpj = cnpj.replace(/[^\d]+/g,'');
         
         if (cnpj === '00000000000000') {
+            errors = 'O campo {name} é inválido.';
             return false;
         }
         
@@ -285,6 +309,7 @@ var Validator = (function() {
         var resultado = (soma % 11 < 2) ? 0 : 11 - soma % 11;
         
         if (parseInt(resultado) !== parseInt(digitos.charAt(0))) {
+            errors = 'O campo {name} é inválido.';
             return false;
         }
         
@@ -302,7 +327,12 @@ var Validator = (function() {
         
         resultado = (soma % 11 < 2) ? 0 : 11 - soma % 11;
         
-        return (parseInt(resultado) === parseInt(digitos.charAt(1))) ? true : false;
+        if (parseInt(resultado) !== parseInt(digitos.charAt(1))) {
+            errors = 'O campo {name} é inválido.';
+            return false;
+        }
+        
+        return true;
     };
     
     return Validator;

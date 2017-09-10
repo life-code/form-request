@@ -45,10 +45,10 @@ var FormRequest = function() {
         var inputs = this.form.find('[rules]');
         
         for (var i = 0; i < inputs.length; i++) {
-            var response = this.rules(inputs[i], this.getRules(inputs[i]));
+            var response = this.rules(inputs[i]);
             
             if (response.fails) {
-                this.displayError(inputs[i], response.message);
+                this.showError(inputs[i], response.message);
                 return false;
             } else {
                 this.hideError(inputs[i]);
@@ -76,8 +76,8 @@ var FormRequest = function() {
         return $(input).attr('rules');
     };
     
-    FormRequest.prototype.displayError = function(input, message) {
-        return $('[error="'+this.getName(input)+'"]').html(message).slideDown();
+    FormRequest.prototype.showError = function(input, message) {
+        return $('[error="'+this.getName(input)+'"]').html(message).fadeIn(300);
     };
     
     FormRequest.prototype.hideError = function(input) {
@@ -88,8 +88,7 @@ var FormRequest = function() {
     
     FormRequest.prototype.generateCall = function(input_value, callback) {
         var params = callback.split(':')[1];
-        
-        var call = 'this.'+callback.split(':')[0]+'(';
+        var call   = 'this.'+callback.split(':')[0]+'(';
         
         if (typeof input_value == 'string' && input_value !== '') {
             call += '"'+input_value+'"';
@@ -98,14 +97,14 @@ var FormRequest = function() {
         }
         
         if (typeof params !== 'undefined') {
-            call += ', '+params;
+            call += ', "'+params+'"';
         }
         
         return eval(call+')');
     };
     
-    FormRequest.prototype.rules = function(input, rules) {
-        var callback = rules.split('|');
+    FormRequest.prototype.rules = function(input) {
+        var callback = this.getRules(input).split('|');
         
         for (var i in callback) {
             if (!this.generateCall(this.getValue(input), callback[i])) {

@@ -13,32 +13,97 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" 
           integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" 
           crossorigin="anonymous">
+          
+    <style>
+        .text-white {
+            color: white;
+        }
+        .alert-small {
+            padding-top: 6px;
+            padding-bottom: 6px;
+            margin-bottom: 5px;
+        }
+        header {
+            height: 10vh;
+        }
+        .main {
+            min-height: 80vh;
+        }
+        .footer {
+            height: 10vh;
+        }
+        .mg-002--top {
+            margin-top: 2%;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <form method="post">
-            <div class="form-group">
-                <label>Email address</label>
-                <span class="col-sm-12 alert alert-warning" style="display:none" error="email"></span>
-                <input type="text" request="email" rules="required|email" name="email" class="form-control" placeholder="Email">
-            </div>
-            
-            <div class="form-group">
-                <label>Password</label>
-                <span class="col-sm-12 alert alert-warning" style="display:none" error="senha"></span>
-                <input type="password" request="senha" rules="required|min:6|max:20" name="password" class="form-control" placeholder="Password">
-            </div>
-            
-            <div class="form-group">
-                <span class="col-sm-12 alert alert-warning" style="display:none" error="termos de uso"></span>
-                <div class="checkbox col-sm-12">
+    <header class="bg-primary">
+        <div class="container">
+            <h1>Form Request - <small class="text-white">The validation form</small></h1>
+        </div>
+    </header>
+    
+    <div class="main">
+        <br><br>
+        
+        <div class="container">
+            <form method="post">
+                <div class="form-group">
+                    <label>Email address</label>
+                    <span class="col-sm-12 alert alert-danger alert-small" style="display:none" error="email"></span>
+                    <input type="email" request="email" rules="required|email|in_array:vinicius.vicente@kbrtec.com.br,vinicius_pugliesi@outlook.com" name="email" class="form-control" placeholder="Email">
+                </div>
+                
+                <div class="form-group">
+                    <label>Password</label>
+                    <span class="col-sm-12 alert alert-danger alert-small" style="display:none" error="senha"></span>
+                    <input type="password" request="senha" rules="required|min:6|max:20" name="password" class="form-control" placeholder="Password">
+                </div>
+                
+                <div class="form-group">
+                    <label>CPF</label>
+                    <span class="col-sm-12 alert alert-danger alert-small" style="display:none" error="CPF"></span>
+                    <input type="text" request="CPF" rules="required|validCpf" name="cpf" class="form-control" placeholder="CPF">
+                </div>
+                
+                <div class="form-group">
+                    <label>CNPJ</label>
+                    <span class="col-sm-12 alert alert-danger alert-small" style="display:none" error="CNPJ"></span>
+                    <input type="text" request="CNPJ" rules="required|validCnpj" name="cnpj" class="form-control" placeholder="CNPJ">
+                </div>
+                
+                <div class="form-group">
+                    <label>Phone</label>
+                    <span class="col-sm-12 alert alert-danger alert-small" style="display:none" error="telefone"></span>
+                    <input type="text" request="telefone" rules="required|phone" name="cnpj" class="form-control" placeholder="Telefone">
+                </div>
+                
+                <div class="form-group">
+                    <label>Numeric</label>
+                    <span class="col-sm-12 alert alert-danger alert-small" style="display:none" error="número"></span>
+                    <input type="text" request="número" rules="required|numeric" name="numeric" class="form-control" placeholder="Número">
+                </div>
+                
+                <div class="form-group">
+                    <span class="col-sm-12 alert alert-danger alert-small" style="display:none" error="termos de uso"></span>
                     <input type="checkbox" request="termos de uso" rules="required" name="checkbox">
                     <label>Termos de uso</label>
                 </div>
-            </div>
-            
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>
+                
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-info">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="footer bg-primary">
+        <div class="container">
+            <p class="text-center lead mg-002--top">
+                Copyright @2017 - <a class="text-white" href="" target="_blank">Vinicius Pugliesi</a>
+            </p>
+        </div>
     </div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -53,7 +118,8 @@
     
     <script>
         $(document).on('submit', 'form', function(){
-            return new FormRequest($(this)).run();
+            new FormRequest($(this)).run();
+            return false;
         });
     </script>
 </body>
