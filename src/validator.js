@@ -1,12 +1,8 @@
 /*
     *Accepted (yes, on, 1, or true)
-    After (Date)
-    After Or Equal (Date)
     *Alpha
     Alpha Numeric
     *Array
-    Before (Date)
-    Before Or Equal (Date)
     *Between
     *Boolean
     *Confirmed
@@ -20,20 +16,19 @@
     Dimensions (Image Files)
     Distinct
     *E-Mail
-    *Empty
     Exists (Database)
     File
     Filled
     Image (File)
     In
-    In Array
+    *In Array
     *Integer
     IP Address
     JSON
-    Max
+    *Max
     MIME Types
     MIME Type By File Extension
-    Min
+    *Min
     Nullable
     Not In
     *Numeric
@@ -90,10 +85,6 @@ var Validator = (function() {
         }
         
         return true;
-    };
-    
-    Validator.prototype.after = function(date) {
-        return ;
     };
     
     Validator.prototype.alpha = function(data) {
@@ -224,7 +215,7 @@ var Validator = (function() {
         return true;
     };
     
-    Validator.prototype.validCpf = function (cpf) {
+    Validator.prototype.valid_cpf = function (cpf) {
         if (!this.cpf(cpf)) {
             errors = 'O campo {name} é inválido.';
             return false;
@@ -280,7 +271,7 @@ var Validator = (function() {
         return true;
     };
     
-    Validator.prototype.validCnpj = function(cnpj) {
+    Validator.prototype.valid_cnpj = function(cnpj) {
         if (!this.cnpj(cnpj)) {
             errors = 'O campo {name} é inválido.';
             return false;
