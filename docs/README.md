@@ -30,7 +30,7 @@ The field under validation must be entirely alphabetic characters.
 ### array
 The field under validation must be a JAVASCRIPT array.
 
-### between
+### between:min,max
 The field under validation must have a size between the given min and max. Strings, numerics, arrays, and files are evaluated in the same fashion as the size rule.
 
 ### boolean
