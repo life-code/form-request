@@ -50,43 +50,43 @@
         <div class="container">
             <form method="post">
                 <div class="form-group">
-                    <label>Email address</label>
-                    <span class="col-sm-12 alert alert-danger alert-small" style="display:none" error="email"></span>
+                    <label class="col-sm-12">Email address</label>
+                    <span class="col-sm-12" style="display:none" error="email"></span>
                     <input type="email" request="email" rules="required|email|in_array:vinicius.vicente@kbrtec.com.br,vinicius_pugliesi@outlook.com" name="email" class="form-control" placeholder="Email">
                 </div>
                 
                 <div class="form-group">
-                    <label>Password</label>
-                    <span class="col-sm-12 alert alert-danger alert-small" style="display:none" error="senha"></span>
+                    <label class="col-sm-12">Password</label>
+                    <span class="col-sm-12" style="display:none" error="senha"></span>
                     <input type="password" request="senha" rules="required|min:6|max:20" name="password" class="form-control" placeholder="Password">
                 </div>
                 
                 <div class="form-group">
-                    <label>CPF</label>
-                    <span class="col-sm-12 alert alert-danger alert-small" style="display:none" error="CPF"></span>
+                    <label class="col-sm-12">CPF</label>
+                    <span class="col-sm-12" style="display:none" error="CPF"></span>
                     <input type="text" request="CPF" rules="required|validCpf" name="cpf" class="form-control" placeholder="CPF">
                 </div>
                 
                 <div class="form-group">
-                    <label>CNPJ</label>
-                    <span class="col-sm-12 alert alert-danger alert-small" style="display:none" error="CNPJ"></span>
+                    <label class="col-sm-12">CNPJ</label>
+                    <span class="col-sm-12" style="display:none" error="CNPJ"></span>
                     <input type="text" request="CNPJ" rules="required|validCnpj" name="cnpj" class="form-control" placeholder="CNPJ">
                 </div>
                 
                 <div class="form-group">
-                    <label>Phone</label>
-                    <span class="col-sm-12 alert alert-danger alert-small" style="display:none" error="telefone"></span>
+                    <label class="col-sm-12">Phone</label>
+                    <span class="col-sm-12" style="display:none" error="telefone"></span>
                     <input type="text" request="telefone" rules="required|phone" name="cnpj" class="form-control" placeholder="Telefone">
                 </div>
                 
                 <div class="form-group">
-                    <label>Numeric</label>
-                    <span class="col-sm-12 alert alert-danger alert-small" style="display:none" error="número"></span>
+                    <label class="col-sm-12">Numeric</label>
+                    <span class="col-sm-12" style="display:none" error="número"></span>
                     <input type="text" request="número" rules="required|numeric" name="numeric" class="form-control" placeholder="Número">
                 </div>
                 
-                <div class="form-group">
-                    <span class="col-sm-12 alert alert-danger alert-small" style="display:none" error="termos de uso"></span>
+                <div class="col-sm-12" class="form-group">
+                    <span class="col-sm-12" style="display:none" error="termos de uso"></span>
                     <input type="checkbox" request="termos de uso" rules="required" name="checkbox">
                     <label>Termos de uso</label>
                 </div>
