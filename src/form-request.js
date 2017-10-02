@@ -77,6 +77,7 @@ var FormRequest = function() {
     };
     
     FormRequest.prototype.showError = function(input, message) {
+        $('html, body').animate({ scrollTop: $('[error="'+this.getName(input)+'"]').offset().top - 100 }, 'slow');
         return $('[error="'+this.getName(input)+'"]').html(message).fadeIn(300);
     };
     
